@@ -1,6 +1,5 @@
 package com.eujian.rabbitmqshare.config;
 
-import java.text.DateFormat;
 import java.util.Date;
 import java.util.UUID;
 
