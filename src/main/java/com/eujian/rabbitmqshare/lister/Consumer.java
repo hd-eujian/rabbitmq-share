@@ -8,6 +8,9 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.listener.api.ChannelAwareMessageListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+
+//消费者处理类
 @Slf4j
 @Component
 public class Consumer implements ChannelAwareMessageListener {
@@ -30,12 +33,5 @@ public class Consumer implements ChannelAwareMessageListener {
         log.info("接受到消息：{}",originalMessage);
         // 代表消费者确认收到当前消息，第二个参数表示一次是否 ack 多条消息
         channel.basicAck(deliveryTag, false);
-
-        // 代表消费者拒绝一条或者多条消息，第二个参数表示一次是否拒绝多条消息，第三个参数表示是否把当前消息重新入队
-//        channel.basicNack(deliveryTag, false, false);
-
-        // 代表消费者拒绝当前消息，第二个参数表示是否把当前消息重新入队
-//        channel.basicReject(deliveryTag,false);
-
     }
 }

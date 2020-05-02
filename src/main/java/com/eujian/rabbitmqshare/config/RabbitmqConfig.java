@@ -15,22 +15,26 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitmqConfig {
 
-
+    //新建topic交换器
     @Bean
     TopicExchange initExchange() {
         return new TopicExchange(Constant.TOPIC);
     }
 
+    //新建队列，要设置独占队列，exclusive
     @Bean
     public Queue initQueue() {
         Queue queue = QueueBuilder.durable(Constant.QUEUE).exclusive().autoDelete().build();
         return queue;
     }
+
+    //交换器和主题绑定
     @Bean
     Binding bindingiTopicExchange() {
         return BindingBuilder.bind(initQueue()).to(initExchange()).with(Constant.ROUTING_KEY);
     }
 
+    //新建消费者
     @Bean
     public SimpleMessageListenerContainer container(ConnectionFactory connectionFactory, ChannelAwareMessageListener listener) {
         SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
@@ -45,8 +49,7 @@ public class RabbitmqConfig {
         container.setAcknowledgeMode(AcknowledgeMode.MANUAL);
 
         container.setPrefetchCount(300);
-
+        //connection
         return container;
     }
-
 }
