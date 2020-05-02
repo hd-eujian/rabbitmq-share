@@ -9,5 +9,5 @@ public interface Constant {
     String ROUTING_KEY = "routingKey:"+new Date().getTime();
     String TOPIC = "topic";
 
-    String REDIS_KEY = "redisKey:"+ROUTING_KEY;
+    String REDIS_KEY = "redisKey:";
 }
